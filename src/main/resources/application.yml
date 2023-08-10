@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: sender
+  datasource:
+    url: jdbc:postgresql://localhost:5432/senderdb
+    username: postgres
+    password: itix.123
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sender.wiris@gmail.com
+    password: jslzlneutzkrivhy
+    properties:
+      mail: 
+        smtp: 
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          # SSL, post 465
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
