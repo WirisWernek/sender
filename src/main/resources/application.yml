@@ -2,9 +2,9 @@ spring:
   application:
     name: sender
   datasource:
-    url: jdbc:postgresql://localhost:5432/senderdb
-    username: postgres
-    password: itix.123
+    url: jdbc:postgresql://${POSTGRES_SERVER}:5432/senderdb
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     show-sql: false
     generate-ddl: true
@@ -18,8 +18,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: sender.wiris@gmail.com
-    password: jslzlneutzkrivhy
+    username: ${GMAIL_USERNAME}
+    password: ${GMAIL_PASSWORD}
     properties:
       mail: 
         smtp: 

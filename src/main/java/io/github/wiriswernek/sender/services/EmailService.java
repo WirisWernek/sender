@@ -5,12 +5,14 @@ import java.time.LocalDateTime;
 import javax.mail.MessagingException;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import io.github.wiriswernek.sender.model.dto.EmailDTO;
+import io.github.wiriswernek.sender.model.dto.StatusDTO;
 import io.github.wiriswernek.sender.model.entity.EmailEntity;
 import io.github.wiriswernek.sender.model.repository.EmailRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ public class EmailService {
 	private final JavaMailSender javaMailSender;
 	private final EmailRepository repository;
 
-    public String enviar(EmailDTO email) {
+    public StatusDTO enviar(EmailDTO email) {
 
         SimpleMailMessage mensagem = new SimpleMailMessage();
         mensagem.setTo(email.getPara());
@@ -32,8 +34,7 @@ public class EmailService {
         javaMailSender.send(mensagem);
 		
 		repository.save(mapper(email));
-        String msg = "Email enviado com sucesso!";
-		return msg;
+		return new StatusDTO(HttpStatus.OK.value(), "Email enviado com sucesso!");
     }
 
     public void enviarEmailComAnexo(String para, String titulo, String conteudo, String arquivo) throws MessagingException {
